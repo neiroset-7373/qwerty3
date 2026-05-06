@@ -24,6 +24,7 @@ class GameActivity : AppCompatActivity() {
 
         state = SettingsManager.loadState(this)
         recalculateStats()
+        setupWallpaper()
         setupTabs()
         showTab("game")
         updateHeader()
@@ -49,6 +50,13 @@ class GameActivity : AppCompatActivity() {
     private fun recalculateStats() {
         val recalculated = GameState.recalculateStats(state)
         state = recalculated
+    }
+
+    private fun setupWallpaper() {
+        val wallpaperId = resources.getIdentifier(state.selectedWallpaper, "drawable", packageName)
+        if (wallpaperId != 0) {
+            findViewById<FrameLayout>(R.id.content_container)?.setBackgroundResource(wallpaperId)
+        }
     }
 
     private fun setupTabs() {
@@ -385,7 +393,7 @@ class GameActivity : AppCompatActivity() {
         val toast = findViewById<TextView>(R.id.toast)
         toast?.apply {
             text = msg
-            setBackgroundColor(android.graphics.Color.parseColor(color))
+            setBackgroundResource(R.drawable.button_secondary_bg)
             visibility = View.VISIBLE
             handler.postDelayed({ visibility = View.GONE }, 3000)
         }

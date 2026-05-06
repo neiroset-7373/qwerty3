@@ -10,7 +10,7 @@ class OobeActivity : AppCompatActivity() {
 
     private var currentStep = 1
     private val totalSteps = 5
-    private var selectedDeviceType = "pc"
+    private var selectedDeviceType = "phone"
     private var selectedWallpaper = "wallpaper_1"
     private var selectedMusic = "track1"
     private var musicEnabled = true
@@ -31,11 +31,11 @@ class OobeActivity : AppCompatActivity() {
             val labelView = findViewById<TextView>(resources.getIdentifier("label_step_${i + 1}", "id", packageName))
             
             if (progressView != null) {
-                progressView.setBackgroundColor(if (i < currentStep) 0xFF3b82f6.toInt() else 0xFF999999.toInt())
+                progressView.setBackgroundColor(if (i < currentStep) 0xFFFF9800.toInt() else 0xFFE0E0E0.toInt())
             }
             if (labelView != null) {
-                labelView.setTextColor(if (i + 1 == currentStep) 0xFF3b82f6.toInt() else 0xFF999999.toInt())
-                labelView.textStyle = if (i + 1 == currentStep) android.graphics.Typeface.BOLD else android.graphics.Typeface.NORMAL
+                labelView.setTextColor(if (i + 1 == currentStep) 0xFF1a1a1a.toInt() else 0xFF666666.toInt())
+                labelView.typeface = if (i + 1 == currentStep) android.graphics.Typeface.BOLD else android.graphics.Typeface.NORMAL
             }
         }
         
@@ -100,7 +100,7 @@ class OobeActivity : AppCompatActivity() {
         otherIndicator.visibility = View.GONE
         
         val selectedText = selected.findViewById<TextView>(selected.id + 1)
-        selectedText?.setTextColor(0xFF3b82f6.toInt())
+        selectedText?.setTextColor(0xFF1a1a1a.toInt())
     }
 
     private fun setupWallpaperStep(view: View) {

@@ -4,10 +4,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/wallpaper_1">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#66FFFFFF" />
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -62,7 +59,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Первоначальная настройка"
+                            android:text="Персонализация"
                             android:textSize="12sp"
                             android:textColor="#666666"
                             android:layout_marginTop="2dp" />
@@ -81,35 +78,35 @@
                         android:layout_width="0dp"
                         android:layout_height="3dp"
                         android:layout_weight="1"
-                        android:background="#3b82f6" />
+                        android:background="#FF9800" />
 
                     <View
                         android:id="@+id/progress_step_2"
                         android:layout_width="0dp"
                         android:layout_height="3dp"
                         android:layout_weight="1"
-                        android:background="#999999" />
+                        android:background="#E0E0E0" />
 
                     <View
                         android:id="@+id/progress_step_3"
                         android:layout_width="0dp"
                         android:layout_height="3dp"
                         android:layout_weight="1"
-                        android:background="#999999" />
+                        android:background="#E0E0E0" />
 
                     <View
                         android:id="@+id/progress_step_4"
                         android:layout_width="0dp"
                         android:layout_height="3dp"
                         android:layout_weight="1"
-                        android:background="#999999" />
+                        android:background="#E0E0E0" />
 
                     <View
                         android:id="@+id/progress_step_5"
                         android:layout_width="0dp"
                         android:layout_height="3dp"
                         android:layout_weight="1"
-                        android:background="#999999" />
+                        android:background="#E0E0E0" />
                 </LinearLayout>
 
                 <!-- Step Labels -->
@@ -127,8 +124,8 @@
                         android:gravity="center"
                         android:text="Устройство"
                         android:textSize="10sp"
-                        android:textColor="#3b82f6"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textColor="#1a1a1a" />
 
                     <TextView
                         android:id="@+id/label_step_2"
@@ -138,7 +135,7 @@
                         android:gravity="center"
                         android:text="Фон"
                         android:textSize="10sp"
-                        android:textColor="#999999" />
+                        android:textColor="#666666" />
 
                     <TextView
                         android:id="@+id/label_step_3"
@@ -148,7 +145,7 @@
                         android:gravity="center"
                         android:text="Иконки"
                         android:textSize="10sp"
-                        android:textColor="#999999" />
+                        android:textColor="#666666" />
 
                     <TextView
                         android:id="@+id/label_step_4"
@@ -158,7 +155,7 @@
                         android:gravity="center"
                         android:text="Музыка"
                         android:textSize="10sp"
-                        android:textColor="#999999" />
+                        android:textColor="#666666" />
 
                     <TextView
                         android:id="@+id/label_step_5"
@@ -168,7 +165,7 @@
                         android:gravity="center"
                         android:text="Старт"
                         android:textSize="10sp"
-                        android:textColor="#999999" />
+                        android:textColor="#666666" />
                 </LinearLayout>
 
                 <!-- Content Container (dynamic steps) -->
@@ -188,15 +185,12 @@
                     android:layout_marginTop="20dp"
                     android:visibility="gone">
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/btn_back"
                         android:layout_width="wrap_content"
                         android:layout_height="45dp"
-                        android:text="← Назад"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:textColor="#3b82f6"
-                        android:background="@drawable/button_secondary_bg"
+                        android:src="@drawable/button_Click.jpg"
+                        android:background="@android:color/transparent"
                         android:paddingHorizontal="20dp"
                         android:enabled="false" />
 
@@ -206,31 +200,25 @@
                         android:layout_height="wrap_content"
                         android:text="Шаг 1 из 5"
                         android:textSize="12sp"
-                        android:textColor="#999999"
+                        android:textColor="#666666"
                         android:layout_marginHorizontal="16dp" />
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/btn_next"
                         android:layout_width="wrap_content"
                         android:layout_height="45dp"
-                        android:text="Далее →"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:textColor="#FFFFFF"
-                        android:background="@drawable/button_primary_bg"
+                        android:src="@drawable/button_Click.jpg"
+                        android:background="@android:color/transparent"
                         android:paddingHorizontal="24dp" />
                 </LinearLayout>
 
                 <!-- Final Start Button (step 5) -->
-                <Button
+                <ImageButton
                     android:id="@+id/btn_start"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:text="🚀 Начать игру!"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
-                    android:background="@drawable/button_primary_bg"
+                    android:src="@drawable/button_Click.jpg"
+                    android:background="@android:color/transparent"
                     android:layout_marginTop="20dp"
                     android:visibility="gone" />
 

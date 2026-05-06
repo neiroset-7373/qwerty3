@@ -4,10 +4,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/wallpaper_1">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#40FFFFFF" />
+
 
     <!-- Header -->
     <LinearLayout
@@ -17,7 +14,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:padding="12dp"
-        android:background="#E6FFFFFF"
+        android:background="@android:color/transparent"
         android:elevation="4dp">
 
         <ImageView
@@ -49,7 +46,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:background="#e8f4fd"
+            android:background="#FFF8E1"
             android:paddingHorizontal="12dp"
             android:paddingVertical="6dp"
             android:layout_marginStart="8dp">
@@ -87,7 +84,7 @@
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:background="#E6FFFFFF"
+        android:background="@android:color/transparent"
         android:elevation="4dp"
         android:paddingVertical="8dp">
 
@@ -114,14 +111,14 @@
                 android:text="Игра"
                 android:textSize="10sp"
                 android:textStyle="bold"
-                android:textColor="#3b82f6"
+                android:textColor="#1a1a1a"
                 android:layout_marginTop="2dp" />
 
             <View
                 android:id="@+id/tab_game_indicator"
                 android:layout_width="24dp"
                 android:layout_height="3dp"
-                android:background="#3b82f6"
+                android:background="#FF9800"
                 android:layout_marginTop="2dp" />
         </LinearLayout>
 
@@ -148,14 +145,14 @@
                 android:text="Улучш."
                 android:textSize="10sp"
                 android:textStyle="bold"
-                android:textColor="#999999"
+                android:textColor="#666666"
                 android:layout_marginTop="2dp" />
 
             <View
                 android:id="@+id/tab_upgrades_indicator"
                 android:layout_width="24dp"
                 android:layout_height="3dp"
-                android:background="#3b82f6"
+                android:background="#FF9800"
                 android:visibility="gone"
                 android:layout_marginTop="2dp" />
         </LinearLayout>
@@ -183,14 +180,14 @@
                 android:text="Подарки"
                 android:textSize="10sp"
                 android:textStyle="bold"
-                android:textColor="#999999"
+                android:textColor="#666666"
                 android:layout_marginTop="2dp" />
 
             <View
                 android:id="@+id/tab_gifts_indicator"
                 android:layout_width="24dp"
                 android:layout_height="3dp"
-                android:background="#3b82f6"
+                android:background="#FF9800"
                 android:visibility="gone"
                 android:layout_marginTop="2dp" />
         </LinearLayout>
@@ -218,14 +215,14 @@
                 android:text="Настр."
                 android:textSize="10sp"
                 android:textStyle="bold"
-                android:textColor="#999999"
+                android:textColor="#666666"
                 android:layout_marginTop="2dp" />
 
             <View
                 android:id="@+id/tab_settings_indicator"
                 android:layout_width="24dp"
                 android:layout_height="3dp"
-                android:background="#3b82f6"
+                android:background="#FF9800"
                 android:visibility="gone"
                 android:layout_marginTop="2dp" />
         </LinearLayout>
@@ -238,7 +235,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:padding="12dp"
-        android:background="#22c55e"
+        android:background="#4CAF50"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
         android:textStyle="bold"

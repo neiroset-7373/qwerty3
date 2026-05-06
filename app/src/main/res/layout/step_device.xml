@@ -53,14 +53,14 @@
                 android:text="Телефон"
                 android:textSize="13sp"
                 android:textStyle="bold"
-                android:textColor="#3b82f6"
+                android:textColor="#1a1a1a"
                 android:layout_marginTop="8dp" />
 
             <View
                 android:id="@+id/indicator_phone"
                 android:layout_width="8dp"
                 android:layout_height="8dp"
-                android:background="#3b82f6"
+                android:background="#FF9800"
                 android:visibility="gone"
                 android:layout_marginTop="8dp" />
         </LinearLayout>
@@ -98,7 +98,7 @@
                 android:id="@+id/indicator_tablet"
                 android:layout_width="8dp"
                 android:layout_height="8dp"
-                android:background="#3b82f6"
+                android:background="#FF9800"
                 android:visibility="gone"
                 android:layout_marginTop="8dp" />
         </LinearLayout>

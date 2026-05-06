@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Выбери фон"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#1a1a1a"
+        android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Фон будет отображаться во время игры"
+        android:textSize="13sp"
+        android:textColor="#666666"
+        android:layout_marginBottom="16dp" />
+
+    <GridView
+        android:id="@+id/wallpaper_grid"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:numColumns="3"
+        android:verticalSpacing="8dp"
+        android:horizontalSpacing="8dp"
+        android:stretchMode="columnWidth"
+        android:gravity="center" />
+
+    <Button
+        android:id="@+id/btn_upload_wallpaper"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="+ Добавить свои обои"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="#3b82f6"
+        android:background="@drawable/button_secondary_bg"
+        android:layout_marginTop="12dp"
+        android:paddingHorizontal="16dp" />
+</LinearLayout>

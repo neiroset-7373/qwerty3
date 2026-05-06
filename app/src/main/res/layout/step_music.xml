@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Выбери музыку"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#1a1a1a"
+        android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Фоновая музыка во время игры"
+        android:textSize="13sp"
+        android:textColor="#666666"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Music Track 1 -->
+    <LinearLayout
+        android:id="@+id/track_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="14dp"
+        android:background="@drawable/device_select_bg"
+        android:layout_marginBottom="10dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <View
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="#3b82f6"
+            android:layout_marginEnd="12dp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Неофициальная мелодия"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="#1a1a1a" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MP3"
+                android:textSize="11sp"
+                android:textColor="#666666"
+                android:layout_marginTop="2dp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_preview_1"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="▶ Слушать"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:textColor="#3b82f6"
+            android:background="@drawable/button_secondary_bg"
+            android:paddingHorizontal="12dp" />
+    </LinearLayout>
+
+    <!-- Music Track 2 -->
+    <LinearLayout
+        android:id="@+id/track_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="14dp"
+        android:background="@drawable/device_select_bg"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <View
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="#94a3b8"
+            android:layout_marginEnd="12dp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Spidi Original"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="#1a1a1a" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MP3"
+                android:textSize="11sp"
+                android:textColor="#666666"
+                android:layout_marginTop="2dp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_preview_2"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="▶ Слушать"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:textColor="#3b82f6"
+            android:background="@drawable/button_secondary_bg"
+            android:paddingHorizontal="12dp" />
+    </LinearLayout>
+
+    <!-- Music Toggle -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="14dp"
+        android:background="#E6FFFFFF">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Музыка включена"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#4b5563" />
+
+        <Switch
+            android:id="@+id/switch_music"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true" />
+    </LinearLayout>
+</LinearLayout>

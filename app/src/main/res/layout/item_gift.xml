@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="14dp"
+    android:background="#E6FFFFFF"
+    android:layout_marginBottom="8dp"
+    android:elevation="2dp">
+
+    <View
+        android:id="@+id/gift_day_bg"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="#999999"
+        android:layout_marginEnd="12dp" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/gift_day_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="День 1"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="#1a1a1a" />
+
+            <TextView
+                android:id="@+id/gift_now_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Сейчас!"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:textColor="#3b82f6"
+                android:background="#dbeafe"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="2dp"
+                android:layout_marginStart="8dp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="4dp">
+
+            <ImageView
+                android:id="@+id/gift_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/coin"
+                android:scaleType="centerInside" />
+
+            <TextView
+                android:id="@+id/gift_reward"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100 монет"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="#4b5563"
+                android:layout_marginStart="6dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/claim_button"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@drawable/button_primary_bg"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/claim_icon"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:src="@drawable/gifts"
+            android:scaleType="centerInside" />
+
+        <TextView
+            android:id="@+id/claim_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Взять"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:layout_marginStart="2dp" />
+    </LinearLayout>
+</LinearLayout>

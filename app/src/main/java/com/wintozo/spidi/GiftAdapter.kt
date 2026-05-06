@@ -76,7 +76,12 @@ class GiftAdapter(
                 setTextColor(android.graphics.Color.parseColor("#3b82f6"))
                 setBackgroundResource(R.drawable.button_secondary_bg)
                 setPadding(8, 4, 8, 4)
-                setMargins(8, 0, 0, 0)
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply {
+                    marginStart = 8
+                }
             }
             dayLabelRow.addView(nowLabel)
         }

@@ -185,12 +185,15 @@
                     android:layout_marginTop="20dp"
                     android:visibility="gone">
 
-                    <ImageButton
+                    <Button
                         android:id="@+id/btn_back"
                         android:layout_width="wrap_content"
                         android:layout_height="45dp"
-                        android:src="@drawable/button_Click.jpg"
-                        android:background="@android:color/transparent"
+                        android:text="Назад"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="#1a1a1a"
+                        android:background="@drawable/button_secondary_bg"
                         android:paddingHorizontal="20dp"
                         android:enabled="false" />
 
@@ -200,25 +203,31 @@
                         android:layout_height="wrap_content"
                         android:text="Шаг 1 из 5"
                         android:textSize="12sp"
-                        android:textColor="#666666"
+                        android:textColor="#1a1a1a"
                         android:layout_marginHorizontal="16dp" />
 
-                    <ImageButton
+                    <Button
                         android:id="@+id/btn_next"
                         android:layout_width="wrap_content"
                         android:layout_height="45dp"
-                        android:src="@drawable/button_Click.jpg"
-                        android:background="@android:color/transparent"
+                        android:text="Далее"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        android:background="@drawable/button_primary_bg"
                         android:paddingHorizontal="24dp" />
                 </LinearLayout>
 
                 <!-- Final Start Button (step 5) -->
-                <ImageButton
+                <Button
                     android:id="@+id/btn_start"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:src="@drawable/button_Click.jpg"
-                    android:background="@android:color/transparent"
+                    android:text="Начать игру!"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/button_primary_bg"
                     android:layout_marginTop="20dp"
                     android:visibility="gone" />
 

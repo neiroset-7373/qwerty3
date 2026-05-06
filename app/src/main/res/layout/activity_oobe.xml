@@ -78,7 +78,7 @@
                         android:layout_width="0dp"
                         android:layout_height="3dp"
                         android:layout_weight="1"
-                        android:background="#FF9800" />
+                        android:background="#3b82f6" />
 
                     <View
                         android:id="@+id/progress_step_2"

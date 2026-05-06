@@ -35,7 +35,7 @@ class OobeActivity : AppCompatActivity() {
             }
             if (labelView != null) {
                 labelView.setTextColor(if (i + 1 == currentStep) 0xFF1a1a1a.toInt() else 0xFF666666.toInt())
-                labelView.typeface = if (i + 1 == currentStep) android.graphics.Typeface.BOLD else android.graphics.Typeface.NORMAL
+                labelView.setTypeface(null, if (i + 1 == currentStep) android.graphics.Typeface.BOLD else android.graphics.Typeface.NORMAL)
             }
         }
         

@@ -19,14 +19,15 @@ class UpgradeAdapter(
     override fun getItemId(position: Int): Long = position.toLong()
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view = convertView ?: LinearLayout(parent?.context).apply {
+        val view = (convertView as? LinearLayout) ?: LinearLayout(parent?.context).apply {
             orientation = LinearLayout.HORIZONTAL
             layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        } as LinearLayout
+        }
 
         val upgrade = upgrades[position]
         val now = System.currentTimeMillis()
-        val isActive = upgrade.active && upgrade.expiresAt != null && now < upgrade.expiresAt
+        val expiresAt = upgrade.expiresAt
+        val isActive = upgrade.active && expiresAt != null && now < expiresAt
         val canAfford = coins >= upgrade.cost
 
         view.removeAllViews()

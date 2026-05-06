@@ -27,7 +27,7 @@ object SettingsManager {
         return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
     }
 
-    fun saveState(context: Context, state: GameState) {
+    fun saveState(context: Context, state: GameState.GameState) {
         val prefs = getPrefs(context)
         with(prefs.edit()) {
             putLong(KEY_COINS, state.coins)
@@ -77,7 +77,7 @@ object SettingsManager {
         }
     }
 
-    fun loadState(context: Context): GameState {
+    fun loadState(context: Context): GameState.GameState {
         val prefs = getPrefs(context)
         
         val upgrades = mutableListOf<Upgrade>()
@@ -112,7 +112,7 @@ object SettingsManager {
         }
         if (dailyGifts.isEmpty()) dailyGifts.addAll(GameState.defaultGifts)
 
-        return GameState(
+        return GameState.GameState(
             coins = prefs.getLong(KEY_COINS, 0),
             totalCoins = prefs.getLong(KEY_TOTAL_COINS, 0),
             totalClicks = prefs.getLong(KEY_TOTAL_CLICKS, 0),

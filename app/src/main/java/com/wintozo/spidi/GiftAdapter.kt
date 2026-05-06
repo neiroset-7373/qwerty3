@@ -6,8 +6,6 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import java.text.SimpleDateFormat
-import java.util.*
 
 class GiftAdapter(
     private val gifts: List<GameState.DailyGift>,
@@ -22,10 +20,10 @@ class GiftAdapter(
     override fun getItemId(position: Int): Long = position.toLong()
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view = convertView ?: LinearLayout(parent?.context).apply {
+        val view = (convertView as? LinearLayout) ?: LinearLayout(parent?.context).apply {
             orientation = LinearLayout.HORIZONTAL
             layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        } as LinearLayout
+        }
 
         val gift = gifts[position]
         val isClaimed = gift.claimed

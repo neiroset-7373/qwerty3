@@ -83,14 +83,15 @@ object GameState {
         var autoClick = 0L
 
         val updatedUpgrades = state.upgrades.map { up ->
-            if (up.active && up.expiresAt != null && now < up.expiresAt) {
+            val expiresAt = up.expiresAt
+            if (up.active && expiresAt != null && now < expiresAt) {
                 if (up.isAutoClicker) {
                     autoClick += up.multiplier.toLong()
                 } else {
                     clickMultiplier *= up.multiplier
                 }
                 up
-            } else if (up.active && up.expiresAt != null && now >= up.expiresAt) {
+            } else if (up.active && expiresAt != null && now >= expiresAt) {
                 up.copy(active = false, expiresAt = null)
             } else {
                 up

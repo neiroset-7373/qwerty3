@@ -8,8 +8,7 @@ import android.os.Looper
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import android.widget.ListView
 
 class GameActivity : AppCompatActivity() {
 
@@ -159,7 +158,7 @@ class GameActivity : AppCompatActivity() {
 
     private fun setupUpgradesTab(view: View) {
         val coinsDisplay = view.findViewById<TextView>(R.id.upgrades_coins)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.upgrades_list)
+        val listView = view.findViewById<ListView>(R.id.upgrades_list)
 
         coinsDisplay?.text = GameState.formatNumber(state.coins)
 
@@ -168,10 +167,7 @@ class GameActivity : AppCompatActivity() {
             buyUpgrade(upgrade)
         }
 
-        recyclerView?.apply {
-            layoutManager = LinearLayoutManager(context)
-            this.adapter = adapter
-        }
+        listView?.adapter = adapter
     }
 
     private fun buyUpgrade(upgrade: GameState.Upgrade) {
@@ -202,7 +198,7 @@ class GameActivity : AppCompatActivity() {
 
     private fun setupGiftsTab(view: View) {
         val messageView = view.findViewById<TextView>(R.id.gifts_message)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.gifts_list)
+        val listView = view.findViewById<ListView>(R.id.gifts_list)
         val medalIcon = view.findViewById<ImageView>(R.id.medal_100k)
 
         val today = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault()).format(java.util.Date())
@@ -219,10 +215,7 @@ class GameActivity : AppCompatActivity() {
             claimGift(gift, today)
         }
 
-        recyclerView?.apply {
-            layoutManager = LinearLayoutManager(context)
-            this.adapter = adapter
-        }
+        listView?.adapter = adapter
     }
 
     private fun claimGift(gift: GameState.DailyGift, today: String) {

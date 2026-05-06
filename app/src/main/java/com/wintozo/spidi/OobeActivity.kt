@@ -31,7 +31,7 @@ class OobeActivity : AppCompatActivity() {
             val labelView = findViewById<TextView>(resources.getIdentifier("label_step_${i + 1}", "id", packageName))
             
             if (progressView != null) {
-                progressView.setBackgroundColor(if (i < currentStep) 0xFFFF9800.toInt() else 0xFFE0E0E0.toInt())
+                progressView.setBackgroundColor(if (i < currentStep) 0xFF3b82f6.toInt() else 0xFFE0E0E0.toInt())
             }
             if (labelView != null) {
                 labelView.setTextColor(if (i + 1 == currentStep) 0xFF1a1a1a.toInt() else 0xFF666666.toInt())
@@ -75,32 +75,34 @@ class OobeActivity : AppCompatActivity() {
         val tabletOption = view.findViewById<LinearLayout>(R.id.option_tablet)
         val phoneIndicator = view.findViewById<View>(R.id.indicator_phone)
         val tabletIndicator = view.findViewById<View>(R.id.indicator_tablet)
-        val phoneText = phoneOption.findViewById<TextView>(phoneOption.id + 1) // Approximate
+        val phoneText = view.findViewById<TextView>(R.id.phone_label)
+        val tabletText = view.findViewById<TextView>(R.id.tablet_label)
 
         phoneOption.setOnClickListener {
             selectedDeviceType = "phone"
-            updateDeviceSelection(phoneOption, tabletOption, phoneIndicator, tabletIndicator)
+            updateDeviceSelection(phoneOption, tabletOption, phoneIndicator, tabletIndicator, phoneText, tabletText)
         }
 
         tabletOption.setOnClickListener {
             selectedDeviceType = "tablet"
-            updateDeviceSelection(tabletOption, phoneOption, tabletIndicator, phoneIndicator)
+            updateDeviceSelection(tabletOption, phoneOption, tabletIndicator, phoneIndicator, tabletText, phoneText)
         }
 
         // Default to phone
         selectedDeviceType = "phone"
-        updateDeviceSelection(phoneOption, tabletOption, phoneIndicator, tabletIndicator)
+        updateDeviceSelection(phoneOption, tabletOption, phoneIndicator, tabletIndicator, phoneText, tabletText)
     }
 
     private fun updateDeviceSelection(selected: LinearLayout, other: LinearLayout, 
-                                      selectedIndicator: View, otherIndicator: View) {
+                                      selectedIndicator: View, otherIndicator: View,
+                                      selectedText: TextView?, otherText: TextView?) {
         selected.isSelected = true
         other.isSelected = false
         selectedIndicator.visibility = View.VISIBLE
         otherIndicator.visibility = View.GONE
         
-        val selectedText = selected.findViewById<TextView>(selected.id + 1)
         selectedText?.setTextColor(0xFF1a1a1a.toInt())
+        otherText?.setTextColor(0xFF666666.toInt())
     }
 
     private fun setupWallpaperStep(view: View) {

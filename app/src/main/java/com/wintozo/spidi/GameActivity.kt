@@ -1,5 +1,6 @@
 package com.wintozo.spidi
 
+import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
@@ -84,7 +85,7 @@ class GameActivity : AppCompatActivity() {
 
     private fun showTab(tab: String) {
         val container = findViewById<FrameLayout>(R.id.content_container)
-        container?. removeAllViews()
+        container?.removeAllViews()
 
         when (tab) {
             "game" -> {
@@ -257,6 +258,8 @@ class GameActivity : AppCompatActivity() {
         val volumeSlider = view.findViewById<SeekBar>(R.id.volume_slider)
         val volumeText = view.findViewById<TextView>(R.id.volume_text)
         val switchMusic = view.findViewById<Switch>(R.id.switch_music)
+        val btnUploadWallpaper = view.findViewById<Button>(R.id.btn_upload_wallpaper)
+        val btnUploadMusic = view.findViewById<Button>(R.id.btn_upload_music)
 
         // Wallpaper grid
         val wallpaperAdapter = WallpaperGridAdapter(this, GameState.wallpapers)
@@ -267,13 +270,15 @@ class GameActivity : AppCompatActivity() {
             state = state.copy(selectedWallpaper = GameState.wallpapers[position])
             wallpaperAdapter.selectedIndex = position
             wallpaperAdapter.notifyDataSetChanged()
+            setupWallpaper()
         }
 
         // Music list
-        musicList?. removeAllViews()
+        musicList?.removeAllViews()
+        val musicTrackViews = mutableListOf<LinearLayout>()
         GameState.musicTracks.forEachIndexed { index, track ->
             val trackView = layoutInflater.inflate(R.layout.item_music_track, musicList, false) as LinearLayout
-            val nameText = trackView.findViewById<TextView>(trackView.id + 1)
+            val nameText = trackView.findViewById<TextView>(R.id.music_track_name)
             nameText?.text = track.name
 
             if (state.selectedMusic == track.id) {
@@ -282,11 +287,12 @@ class GameActivity : AppCompatActivity() {
 
             trackView.setOnClickListener {
                 state = state.copy(selectedMusic = track.id)
-                musicList?.findAllViews { it is LinearLayout && it != trackView }?.forEach { it.isSelected = false }
+                musicTrackViews.forEach { it.isSelected = false }
                 trackView.isSelected = true
                 setupMusic()
             }
 
+            musicTrackViews.add(trackView)
             musicList?.addView(trackView)
         }
 

@@ -48,6 +48,7 @@
                 android:scaleType="centerInside" />
 
             <TextView
+                android:id="@+id/phone_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Телефон"
@@ -86,6 +87,7 @@
                 android:scaleType="centerInside" />
 
             <TextView
+                android:id="@+id/tablet_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Планшет"

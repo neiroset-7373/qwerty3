@@ -4,54 +4,65 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:gravity="center_vertical"
-    android:padding="14dp"
-    android:background="#E6FFFFFF"
-    android:layout_marginBottom="8dp"
-    android:elevation="2dp">
+    android:padding="16dp"
+    android:background="#BFFFFFFF"
+    android:elevation="4dp">
 
-    <View
-        android:id="@+id/gift_day_bg"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:background="#999999"
-        android:layout_marginEnd="12dp" />
+    <LinearLayout
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:background="#1E3b82f6"
+        android:backgroundTint="#1E3b82f6">
+
+        <TextView
+            android:id="@+id/gift_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#3b82f6" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginLeft="12dp">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/gift_reward"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:text="100 монет"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#1a1a1a" />
 
-            <TextView
-                android:id="@+id/gift_day_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="День 1"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                android:textColor="#1a1a1a" />
+        <TextView
+            android:id="@+id/gift_special"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Золотой Спиди"
+            android:textSize="12sp"
+            android:textColor="#3b82f6"
+            android:visibility="gone"
+            android:layout_marginTop="4dp" />
+    </LinearLayout>
 
-            <TextView
-                android:id="@+id/gift_now_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" Сейчас!"
-                android:textSize="10sp"
-                android:textStyle="bold"
-                android:textColor="#3b82f6"
-                android:background="#dbeafe"
-                android:paddingLeft="6dp"
-                android:paddingRight="6dp"
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"
-                android:layout_marginStart="8dp"
-                android:visibility="gone" />
-        </LinearLayout>
+    <Button
+        android:id="@+id/claim_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:text="Забрать"
+        android:textSize="12sp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:backgroundTint="#3b82f6"
+        android:textColor="#ffffff" />
+</LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -75,7 +86,7 @@
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:textColor="#4b5563"
-                android:layout_marginStart="6dp" />
+                android:layout_marginLeft="6dp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -104,6 +115,6 @@
             android:textSize="11sp"
             android:textStyle="bold"
             android:textColor="#FFFFFF"
-            android:layout_marginStart="2dp" />
+            android:layout_marginLeft="2dp" />
     </LinearLayout>
 </LinearLayout>

@@ -4,67 +4,155 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Выбери устройство"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="#1a1a1a"
-        android:layout_marginBottom="4dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Интерфейс адаптируется под твоё устройство"
-        android:textSize="13sp"
-        android:textColor="#666666"
-        android:layout_marginBottom="20dp" />
-
     <LinearLayout
+        android:id="@+id/phone_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center_vertical"
+        android:padding="20dp"
+        android:background="@drawable/device_card_bg"
+        android:layout_marginBottom="12dp"
+        android:clickable="true"
+        android:focusable="true">
 
-        <!-- Phone Option -->
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/phone"
+            android:scaleType="centerInside" />
+
         <LinearLayout
-            android:id="@+id/option_phone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:gravity="center"
-            android:padding="16dp"
-            android:background="@drawable/device_select_bg"
-            android:layout_margin="4dp"
-            android:clickable="true"
-            android:focusable="true">
-
-            <ImageView
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:src="@drawable/phone"
-                android:scaleType="centerInside" />
+            android:layout_marginLeft="16dp">
 
             <TextView
-                android:id="@+id/phone_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Телефон"
-                android:textSize="13sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="#1a1a1a"
-                android:layout_marginTop="8dp" />
+                android:textColor="#ffffff" />
 
-            <View
-                android:id="@+id/indicator_phone"
-                android:layout_width="8dp"
-                android:layout_height="8dp"
-                android:background="#3b82f6"
-                android:visibility="gone"
-                android:layout_marginTop="8dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Играйте на ходу"
+                android:textSize="14sp"
+                android:textColor="#9ca3af"
+                android:layout_marginTop="4dp" />
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/phone_check"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/check_circle"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tablet_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="20dp"
+        android:background="@drawable/device_card_bg"
+        android:layout_marginBottom="12dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/tablet"
+            android:scaleType="centerInside" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginLeft="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Планшет"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Больше экрана"
+                android:textSize="14sp"
+                android:textColor="#9ca3af"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/tablet_check"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/check_circle"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/pc_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="20dp"
+        android:background="@drawable/device_card_bg"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/computer"
+            android:scaleType="centerInside" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginLeft="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Компьютер"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Полный опыт"
+                android:textSize="14sp"
+                android:textColor="#9ca3af"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/pc_check"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/check_circle"
+            android:visibility="gone" />
+    </LinearLayout>
+</LinearLayout>
 
         <!-- Tablet Option -->
         <LinearLayout

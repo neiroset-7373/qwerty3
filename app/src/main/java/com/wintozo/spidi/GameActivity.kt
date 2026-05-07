@@ -1,37 +1,652 @@
 package com.wintozo.spidi
 
-import android.content.Intent
-import android.media.MediaPlayer
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
+import android.app.Activity
+import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
+import android.media.AudioAttributes
+import android.media.AudioManager
+import android.media.SoundPool
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.View
+import android.view.*
+import android.view.animation.*
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import android.widget.ListView
+import androidx.core.content.ContextCompat
 
 class GameActivity : AppCompatActivity() {
 
-    private var state: GameState.GameState = GameState.GameState()
-    private var currentTab: String = "game"
-    private var mediaPlayer: MediaPlayer? = null
+    private lateinit var settingsManager: SettingsManager
+    private lateinit var state: GameState.GameState
+    private var clickPower = 1L
+    private var autoClickPerSecond = 0L
+    private var baseClickPower = 1L
+    private var baseAutoClick = 0L
+    private var deviceType = "pc"
+    private var wallpaper: Int = R.drawable.wallpeper_1
+    private var selectedMusic = "track1"
+    private var musicEnabled = true
+    private var musicVolume = 0.3f
+
+    private lateinit var wallpaperBg: ImageView
+    private lateinit var coinsDisplay: TextView
+    private lateinit var clickPowerDisplay: TextView
+    private lateinit var autoClickDisplay: TextView
+    private lateinit var totalClicksDisplay: TextView
+    private lateinit var clickBtn: ImageView
+    private lateinit var clickBtnContainer: FrameLayout
+    private lateinit var coinsContainer: FrameLayout
+    private lateinit var floatingCoinsContainer: FrameLayout
+    private lateinit var totalClicksTextView: TextView
+    private lateinit var header: LinearLayout
+    private lateinit var bottomNav: LinearLayout
+    private lateinit var tabGame: LinearLayout
+    private lateinit var tabUpgrades: LinearLayout
+    private lateinit var tabGifts: LinearLayout
+    private lateinit var tabSettings: LinearLayout
+    private lateinit var contentContainer: FrameLayout
+    private lateinit var toastView: TextView
+    private lateinit var medalIcon: ImageView
+
+    private lateinit var upgradesList: ListView
+    private lateinit var giftsList: ListView
+
+    private var totalClicks = 0L
+    private var coins = 0L
     private val handler = Handler(Looper.getMainLooper())
+    private val autoClickHandler = Handler(Looper.getMainLooper())
     private var autoClickRunnable: Runnable? = null
+
+    private var soundPool: SoundPool? = null
+    private var clickSoundId = 0
+
+    private var musicPlayer: android.media.MediaPlayer? = null
+    private var isMusicPlaying = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
+        supportActionBar?.hide()
+
+        settingsManager = SettingsManager(this)
+        loadState()
+
         setContentView(R.layout.activity_game)
 
-        state = SettingsManager.loadState(this)
-        recalculateStats()
-        setupWallpaper()
-        setupTabs()
-        showTab("game")
-        updateHeader()
-        startAutoClick()
-        startSaveTimer()
-        setupMusic()
+        initViews()
+        setupListeners()
+        applySettings()
+        startAutoClicker()
+        updateUI()
     }
+
+    private fun initViews() {
+        wallpaperBg = findViewById(R.id.wallpaper_bg)
+        coinsDisplay = findViewById(R.id.coins_display)
+        clickPowerDisplay = findViewById(R.id.click_power_display)
+        autoClickDisplay = findViewById(R.id.auto_click_display)
+        totalClicksDisplay = findViewById(R.id.total_clicks_display)
+        clickBtn = findViewById(R.id.click_btn)
+        clickBtnContainer = findViewById(R.id.click_btn_container)
+        coinsContainer = findViewById(R.id.coins_container)
+        floatingCoinsContainer = findViewById(R.id.floating_coins_container)
+        totalClicksTextView = findViewById(R.id.total_clicks_display)
+        header = findViewById(R.id.header)
+        bottomNav = findViewById(R.id.bottom_nav)
+        tabGame = findViewById(R.id.tab_game)
+        tabUpgrades = findViewById(R.id.tab_upgrades)
+        tabGifts = findViewById(R.id.tab_gifts)
+        tabSettings = findViewById(R.id.tab_settings)
+        contentContainer = findViewById(R.id.content_container)
+        toastView = findViewById(R.id.toast_view)
+        medalIcon = findViewById(R.id.medal_icon)
+
+        loadClickSound()
+    }
+
+    private fun loadClickSound() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val attrs = AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_GAME)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SOUND)
+                .build()
+            soundPool = SoundPool.Builder()
+                .setMaxStreams(3)
+                .setAudioAttributes(attrs)
+                .build()
+        } else {
+            soundPool = SoundPool(3, AudioManager.STREAM_MUSIC, 0)
+        }
+        clickSoundId = soundPool?.load(this, R.raw.click, 1) ?: 0
+    }
+
+    private fun playClickSound() {
+        if (!musicEnabled) return
+        soundPool?.play(clickSoundId, 0.5f, 0.5f, 0, 0, 1f)
+    }
+
+    private fun setupListeners() {
+        clickBtn.setOnClickListener {
+            handleMainClick()
+        }
+
+        tabGame.setOnClickListener { showTab("game") }
+        tabUpgrades.setOnClickListener { showTab("upgrades") }
+        tabGifts.setOnClickListener { showTab("gifts") }
+        tabSettings.setOnClickListener { showTab("settings") }
+    }
+
+    private fun handleMainClick() {
+        coins += clickPower
+        totalClicks++
+        playClickSound()
+        animateClick()
+        spawnFloatingCoin()
+        updateUI()
+        saveState()
+    }
+
+    private fun animateClick() {
+        clickBtn.animate()
+            .scaleX(0.95f)
+            .scaleY(0.95f)
+            .setDuration(50)
+            .withEndAction {
+                clickBtn.animate()
+                    .scaleX(1f)
+                    .scaleY(1f)
+                    .setDuration(50)
+                    .start()
+            }
+            .start()
+    }
+
+    private fun spawnFloatingCoin() {
+        val coin = ImageView(this).apply {
+            setImageResource(R.drawable.coin)
+            layoutParams = FrameLayout.LayoutParams(32, 32)
+        }
+
+        val randomX = (0..100).random()
+        val randomY = (0..100).random()
+
+        coin.x = randomX.toFloat()
+        coin.y = randomY.toFloat()
+
+        floatingCoinsContainer.addView(coin)
+
+        val animator = ObjectAnimator.ofFloat(coin, "translationY", 0f, -150f)
+        animator.duration = 800
+        animator.interpolator = DecelerateInterpolator()
+
+        val alphaAnimator = ObjectAnimator.ofFloat(coin, "alpha", 1f, 0f)
+        alphaAnimator.duration = 800
+
+        val animatorSet = AnimatorSet()
+        animatorSet.playTogether(animator, alphaAnimator)
+        animatorSet.start()
+
+        animatorSet.addListener(object : android.animation.Animator.AnimatorListener {
+            override fun onAnimationEnd(animation: android.animation.Animator) {
+                floatingCoinsContainer.removeView(coin)
+            }
+            override fun onAnimationStart(animation: android.animation.Animator) {}
+            override fun onAnimationCancel(animation: android.animation.Animator) {}
+            override fun onAnimationRepeat(animation: android.animation.Animator) {}
+        })
+    }
+
+    private fun showTab(tabName: String) {
+        contentContainer.removeAllViews()
+
+        val inflate = LayoutInflater.from(this)
+        when (tabName) {
+            "game" -> {
+                inflate.inflate(R.layout.tab_game, contentContainer, false)
+                    .let { contentContainer.addView(it) }
+                updateTabIndicator(tabGame)
+            }
+            "upgrades" -> {
+                inflate.inflate(R.layout.tab_upgrades, contentContainer, false)
+                    .let { contentContainer.addView(it) }
+                setupUpgradesTab()
+                updateTabIndicator(tabUpgrades)
+            }
+            "gifts" -> {
+                inflate.inflate(R.layout.tab_gifts, contentContainer, false)
+                    .let { contentContainer.addView(it) }
+                setupGiftsTab()
+                updateTabIndicator(tabGifts)
+            }
+            "settings" -> {
+                inflate.inflate(R.layout.tab_settings, contentContainer, false)
+                    .let { contentContainer.addView(it) }
+                setupSettingsTab()
+                updateTabIndicator(tabSettings)
+            }
+        }
+    }
+
+    private fun updateTabIndicator(selectedTab: LinearLayout) {
+        listOf(tabGame, tabUpgrades, tabGifts, tabSettings).forEach { tab ->
+            val indicator = when (tab) {
+                tabGame -> tabGame.findViewById<View>(R.id.tab_game_indicator)
+                tabUpgrades -> tabUpgrades.findViewById<View>(R.id.tab_upgrades_indicator)
+                tabGifts -> tabGifts.findViewById<View>(R.id.tab_gifts_indicator)
+                tabSettings -> tabSettings.findViewById<View>(R.id.tab_settings_indicator)
+                else -> null
+            }
+            indicator?.visibility = if (tab == selectedTab) View.VISIBLE else View.GONE
+            
+            val textView = tab.getChildAt(1) as? TextView
+            textView?.apply {
+                setTextColor(if (tab == selectedTab) Color.parseColor("#1a1a1a") else Color.parseColor("#9ca3af"))
+            }
+        }
+    }
+
+    private fun setupUpgradesTab() {
+        val contentView = findViewById<View>(R.id.upgrades_list) as? ListView ?: return
+        upgradesList = contentView
+        
+        val upgrades = state.upgrades.map { up ->
+            GameState.Upgrade(
+                id = up.id,
+                name = up.name,
+                description = up.description,
+                cost = up.cost,
+                multiplier = up.multiplier,
+                isAutoClicker = up.isAutoClicker,
+                icon = up.icon,
+                duration = up.duration,
+                active = up.active,
+                expiresAt = up.expiresAt
+            )
+        }.toMutableList()
+
+        val adapter = object : BaseAdapter() {
+            override fun getCount() = upgrades.size
+            override fun getItem(position: Int) = upgrades[position]
+            override fun getItemId(position: Int) = position.toLong()
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+                var view = convertView
+                val holder: UpgradeViewHolder
+
+                if (view == null) {
+                    view = LayoutInflater.from(this@GameActivity)
+                        .inflate(R.layout.item_upgrade, parent, false)
+                    holder = UpgradeViewHolder(view)
+                    view.tag = holder
+                } else {
+                    holder = view.tag as UpgradeViewHolder
+                }
+
+                val upgrade = upgrades[position]
+                holder.bind(upgrade)
+                return view!!
+            }
+        }
+
+        upgradesList.adapter = adapter
+    }
+
+    inner class UpgradeViewHolder(view: View) {
+        private val icon: TextView = view.findViewById(R.id.upgrade_icon)
+        private val name: TextView = view.findViewById(R.id.upgrade_name)
+        private val desc: TextView = view.findViewById(R.id.upgrade_desc)
+        private val time: TextView = view.findViewById(R.id.upgrade_time)
+        private val cost: TextView = view.findViewById(R.id.upgrade_cost)
+        private val buyBtn: Button = view.findViewById(R.id.buy_btn)
+
+        fun bind(upgrade: GameState.Upgrade) {
+            icon.text = upgrade.icon
+            name.text = upgrade.name
+            desc.text = upgrade.description
+            cost.text = "${GameState.formatNumber(upgrade.cost)} 💰"
+
+            if (upgrade.active) {
+                time.visibility = View.VISIBLE
+                time.text = "Осталось: ${GameState.formatTimeRemaining(upgrade.expiresAt!!)}"
+                buyBtn.text = "Активно"
+                buyBtn.isEnabled = false
+                buyBtn.setBackgroundColor(Color.parseColor("#9ca3af"))
+            } else {
+                time.visibility = View.GONE
+                buyBtn.text = "Купить"
+                buyBtn.isEnabled = coins >= upgrade.cost
+                buyBtn.setBackgroundColor(Color.parseColor("#3b82f6"))
+            }
+
+            buyBtn.setOnClickListener {
+                if (coins >= upgrade.cost && !upgrade.active) {
+                    coins -= upgrade.cost
+                    upgrade.active = true
+                    upgrade.expiresAt = System.currentTimeMillis() + upgrade.duration
+                    GameState.recalculateStats(state)
+                    updateUI()
+                    saveState()
+                    showToast("Куплено: ${upgrade.name}")
+                    setupUpgradesTab()
+                }
+            }
+        }
+    }
+
+    private fun setupGiftsTab() {
+        val contentView = findViewById<View>(R.id.gifts_list) as? ListView ?: return
+        giftsList = contentView
+
+        val gifts = state.dailyGifts.toMutableList()
+
+        val adapter = object : BaseAdapter() {
+            override fun getCount() = gifts.size
+            override fun getItem(position: Int) = gifts[position]
+            override fun getItemId(position: Int) = position.toLong()
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+                var view = convertView
+                val holder: GiftViewHolder
+
+                if (view == null) {
+                    view = LayoutInflater.from(this@GameActivity)
+                        .inflate(R.layout.item_gift, parent, false)
+                    holder = GiftViewHolder(view)
+                    view.tag = holder
+                } else {
+                    holder = view.tag as GiftViewHolder
+                }
+
+                val gift = gifts[position]
+                holder.bind(gift)
+                return view!!
+            }
+        }
+
+        giftsList.adapter = adapter
+    }
+
+    inner class GiftViewHolder(view: View) {
+        private val day: TextView = view.findViewById(R.id.gift_day)
+        private val reward: TextView = view.findViewById(R.id.gift_reward)
+        private val special: TextView = view.findViewById(R.id.gift_special)
+        private val claimBtn: Button = view.findViewById(R.id.claim_btn)
+
+        fun bind(gift: GameState.DailyGift) {
+            day.text = gift.day.toString()
+            reward.text = gift.reward
+            
+            if (gift.specialReward != null) {
+                special.visibility = View.VISIBLE
+                special.text = gift.specialReward
+            } else {
+                special.visibility = View.GONE
+            }
+
+            if (gift.claimed) {
+                claimBtn.text = "Забрано"
+                claimBtn.isEnabled = false
+                claimBtn.setBackgroundColor(Color.parseColor("#9ca3af"))
+            } else {
+                claimBtn.text = "Забрать"
+                claimBtn.isEnabled = true
+                claimBtn.setBackgroundColor(Color.parseColor("#3b82f6"))
+            }
+
+            claimBtn.setOnClickListener {
+                if (!gift.claimed) {
+                    gift.claimed = true
+                    gift.coins?.let { coins += it }
+                    gift.specialReward?.let {
+                        if (it == "golden_spidi") {
+                            state.goldenSpidi = true
+                            baseClickPower += 50
+                        }
+                    }
+                    updateUI()
+                    saveState()
+                    showToast("Получено: ${gift.reward}")
+                    setupGiftsTab()
+                }
+            }
+        }
+    }
+
+    private fun setupSettingsTab() {
+        val contentView = contentContainer.findViewById<View>(R.id.music_tracks_container)
+        val wallpapersContainer = contentContainer.findViewById<LinearLayout>(R.id.wallpapers_grid)
+        val deviceContainer = contentContainer.findViewById<LinearLayout>(R.id.device_type_container)
+        val volumeSlider = contentContainer.findViewById<SeekBar>(R.id.music_volume_slider)
+        val resetBtn = contentContainer.findViewById<Button>(R.id.reset_progress_btn)
+
+        // Music tracks
+        GameState.musicTracks.forEach { track ->
+            val musicItem = LayoutInflater.from(this)
+                .inflate(R.layout.item_music_track, contentView, false)
+            val name = musicItem.findViewById<TextView>(R.id.music_name)
+            val check = musicItem.findViewById<ImageView>(R.id.music_check)
+            
+            name.text = track.name
+            check.visibility = if (selectedMusic == track.id) View.VISIBLE else View.GONE
+
+            musicItem.setOnClickListener {
+                selectedMusic = track.id
+                settingsManager.selectedMusic = selectedMusic
+                stopMusic()
+                if (musicEnabled) startMusic()
+                setupSettingsTab()
+            }
+
+            contentView.addView(musicItem)
+        }
+
+        // Wallpapers
+        wallpapersContainer?.let { container ->
+            GameState.wallpapers.forEachIndexed { index, wallpaperRes ->
+                val wpItem = LayoutInflater.from(this)
+                    .inflate(R.layout.item_wallpaper, container, false)
+                val img = wpItem.findViewById<ImageView>(R.id.wallpaper_img)
+                val check = wpItem.findViewById<ImageView>(R.id.wallpaper_check)
+                
+                img.setImageResource(wallpaperRes)
+                check.visibility = if (this.wallpaper == wallpaperRes) View.VISIBLE else View.GONE
+
+                wpItem.setOnClickListener {
+                    wallpaper = wallpaperRes
+                    settingsManager.selectedWallpaper = wallpaper.toString()
+                    wallpaperBg.setImageResource(wallpaper)
+                    setupSettingsTab()
+                }
+
+                container.addView(wpItem)
+            }
+        }
+
+        // Device type
+        val devices = listOf(
+            Pair(R.drawable.phone, "Телефон", "phone"),
+            Pair(R.drawable.tablet, "Планшет", "tablet"),
+            Pair(R.drawable.computer, "Компьютер", "pc")
+        )
+
+        devices.forEach { (iconRes, name, type) ->
+            val deviceItem = LayoutInflater.from(this)
+                .inflate(R.layout.item_device, deviceContainer, false)
+            val icon = deviceItem.findViewById<ImageView>(R.id.device_icon)
+            val deviceName = deviceItem.findViewById<TextView>(R.id.device_name)
+            val check = deviceItem.findViewById<ImageView>(R.id.device_check)
+
+            icon.setImageResource(iconRes)
+            deviceName.text = name
+            check.visibility = if (deviceType == type) View.VISIBLE else View.GONE
+
+            deviceItem.setOnClickListener {
+                deviceType = type
+                settingsManager.deviceType = deviceType
+                setupSettingsTab()
+            }
+
+            deviceContainer.addView(deviceItem)
+        }
+
+        // Volume
+        volumeSlider?.progress = (musicVolume * 100).toInt()
+        volumeSlider?.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                musicVolume = progress / 100f
+                settingsManager.musicVolume = musicVolume
+                updateMusicVolume()
+            }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+        })
+
+        // Reset
+        resetBtn?.setOnClickListener {
+            coins = 0
+            totalClicks = 0
+            totalClicks = 0
+            baseClickPower = 1
+            baseAutoClick = 0
+            state.upgrades = GameState.defaultUpgrades.map { it.copy(active = false, expiresAt = null) }
+            state.dailyGifts = GameState.defaultGifts.map { it.copy(claimed = false) }
+            updateUI()
+            saveState()
+            showToast("Прогресс сброшен")
+        }
+    }
+
+    private fun applySettings() {
+        deviceType = settingsManager.deviceType
+        wallpaper = settingsManager.selectedWallpaper.toIntOrNull() ?: R.drawable.wallpeper_1
+        selectedMusic = settingsManager.selectedMusic
+        musicEnabled = settingsManager.musicEnabled
+        musicVolume = settingsManager.musicVolume
+
+        wallpaperBg.setImageResource(wallpaper)
+        updateUI()
+
+        if (musicEnabled) {
+            startMusic()
+        }
+
+        showTab("game")
+    }
+
+    private fun startMusic() {
+        stopMusic()
+        val trackRes = if (selectedMusic == "track1") R.raw.unofficial else R.raw.spidi_official
+        musicPlayer = android.media.MediaPlayer.create(this, trackRes)
+        musicPlayer?.isLooping = true
+        updateMusicVolume()
+        musicPlayer?.start()
+        isMusicPlaying = true
+    }
+
+    private fun stopMusic() {
+        musicPlayer?.stop()
+        musicPlayer?.release()
+        musicPlayer = null
+        isMusicPlaying = false
+    }
+
+    private fun updateMusicVolume() {
+        musicPlayer?.setVolume(musicVolume, musicVolume)
+    }
+
+    private fun updateUI() {
+        val formattedCoins = GameState.formatNumber(coins)
+        coinsDisplay.text = formattedCoins
+        clickPowerDisplay.text = GameState.formatNumber(clickPower)
+        autoClickDisplay.text = "$autoClickPerSecond/сек"
+        totalClicksDisplay.text = GameState.formatNumber(totalClicks)
+
+        if (state.goldenSpidi) {
+            medalIcon.visibility = View.VISIBLE
+        }
+    }
+
+    private fun showToast(message: String) {
+        toastView.text = message
+        toastView.visibility = View.VISIBLE
+        toastView.alpha = 1f
+        toastView.animate()
+            .alpha(0f)
+            .setDuration(2000)
+            .setStartDelay(1500)
+            .withEndAction { toastView.visibility = View.GONE }
+            .start()
+    }
+
+    private fun startAutoClicker() {
+        autoClickRunnable = object : Runnable {
+            override fun run() {
+                if (autoClickPerSecond > 0) {
+                    coins += autoClickPerSecond
+                    totalClicks += autoClickPerSecond
+                    updateUI()
+                    saveState()
+                }
+                autoClickHandler.postDelayed(this, 1000)
+            }
+        }
+        autoClickRunnable?.let { autoClickHandler.post(it) }
+    }
+
+    private fun loadState() {
+        val saved = settingsManager.loadState()
+        coins = saved.coins
+        totalClicks = saved.totalClicks
+        baseClickPower = saved.baseClickPower
+        baseAutoClick = saved.baseAutoClick
+        state = saved
+        GameState.recalculateStats(state)
+        clickPower = state.clickPower
+        autoClickPerSecond = state.autoClickPerSecond
+    }
+
+    private fun saveState() {
+        state = state.copy(
+            coins = coins,
+            totalCoins = coins,
+            totalClicks = totalClicks,
+            baseClickPower = baseClickPower,
+            baseAutoClick = baseAutoClick,
+            clickPower = clickPower,
+            autoClickPerSecond = autoClickPerSecond,
+            deviceType = deviceType,
+            selectedWallpaper = wallpaper.toString(),
+            selectedMusic = selectedMusic,
+            musicEnabled = musicEnabled,
+            musicVolume = musicVolume
+        )
+        settingsManager.saveState(state)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        saveState()
+        if (!musicEnabled) stopMusic()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadState()
+        if (musicEnabled && !isMusicPlaying) startMusic()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        autoClickHandler.removeCallbacksAndMessages(null)
+        stopMusic()
+        soundPool?.release()
+        soundPool = null
+    }
+}
 
     override fun onDestroy() {
         super.onDestroy()

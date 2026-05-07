@@ -1,75 +1,222 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/wallpaper_1">
+    android:layout_height="match_parent">
+
+    <!-- Wallpaper overlay -->
+    <ImageView
+        android:id="@+id/tab_wallpaper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#40FFFFFF" />
 
-    <LinearLayout
+    <!-- Content -->
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:padding="16dp">
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:background="#E6FFFFFF"
-            android:padding="20dp"
-            android:layout_marginBottom="24dp"
-            android:elevation="4dp">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/coin"
-                android:scaleType="centerInside" />
-
-            <TextView
-                android:id="@+id/game_coins"
-                android:layout_width="wrap_content"
+            <!-- Click Power Card -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="0"
-                android:textSize="32sp"
-                android:textStyle="bold"
-                android:textColor="#1a1a1a"
-                android:layout_marginStart="8dp" />
-        </LinearLayout>
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:background="#BFFFFFFF"
+                android:layout_marginBottom="16dp"
+                android:elevation="4dp">
 
-        <ImageButton
-            android:id="@+id/click_button"
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/sila_clicka"
+                    android:scaleType="centerInside" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Сила клика"
+                        android:textSize="14sp"
+                        android:textColor="#6b7280" />
+
+                    <TextView
+                        android:id="@+id/click_power_display"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="#1a1a1a" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Auto Clicker Card -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:background="#BFFFFFFF"
+                android:layout_marginBottom="16dp"
+                android:elevation="4dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/autoclicker"
+                    android:scaleType="centerInside" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Автоклик"
+                        android:textSize="14sp"
+                        android:textColor="#6b7280" />
+
+                    <TextView
+                        android:id="@+id/auto_click_display"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0/сек"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="#1a1a1a" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Main Click Button -->
+            <FrameLayout
+                android:id="@+id/click_btn_container"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="16dp">
+
+                <ImageView
+                    android:id="@+id/click_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/click_default"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/circle_bg"
+                    android:elevation="8dp" />
+
+                <FrameLayout
+                    android:id="@+id/coins_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </FrameLayout>
+
+            <!-- Total Clicks -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="12dp"
+                android:background="#BFFFFFFF"
+                android:elevation="4dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/game"
+                    android:scaleType="centerInside" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Всего кликов: "
+                    android:textSize="14sp"
+                    android:textColor="#6b7280"
+                    android:layout_marginLeft="8dp" />
+
+                <TextView
+                    android:id="@+id/total_clicks_display"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="#1a1a1a" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <FrameLayout
+        android:id="@+id/floating_coins_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</FrameLayout>
+
+        <!-- Click button -->
+        <FrameLayout
+            android:id="@+id/click_container"
             android:layout_width="180dp"
             android:layout_height="180dp"
-            android:src="@drawable/click_default"
-            android:background="@android:color/transparent"
-            android:scaleType="centerInside"
-            android:adjustViewBounds="true"
-            android:contentDescription="Click"
-            android:layout_marginBottom="24dp" />
+            android:layout_marginBottom="16dp">
 
+            <ImageView
+                android:id="@+id/click_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/click_default"
+                android:scaleType="fitCenter" />
+
+            <!-- Float coins container -->
+            <FrameLayout
+                android:id="@+id/float_coins_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </FrameLayout>
+
+        <!-- Stats -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center">
 
+            <!-- Click power -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:background="#E6FFFFFF"
-                android:padding="12dp"
-                android:layout_marginEnd="6dp"
-                android:elevation="2dp">
+                android:background="#BFFFFFFF"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:layout_marginRight="6dp">
 
                 <ImageView
                     android:layout_width="20dp"
@@ -83,31 +230,33 @@
                     android:text="Сила"
                     android:textSize="10sp"
                     android:textColor="#666666"
-                    android:layout_marginTop="4dp" />
+                    android:layout_marginTop="2dp" />
 
                 <TextView
-                    android:id="@+id/stat_click_power"
+                    android:id="@+id/click_power_display"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
-                    android:textColor="#1a1a1a"
+                    android:textColor="#3b82f6"
                     android:layout_marginTop="2dp" />
             </LinearLayout>
 
+            <!-- Auto clicker (hidden by default) -->
             <LinearLayout
-                android:id="@+id/stat_autoclick_container"
+                android:id="@+id/auto_clicker_container"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:background="#E6FFFFFF"
-                android:padding="12dp"
-                android:layout_marginStart="6dp"
-                android:layout_marginEnd="6dp"
-                android:elevation="2dp"
+                android:background="#BFFFFFFF"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:layout_marginLeft="6dp"
                 android:visibility="gone">
 
                 <ImageView
@@ -122,36 +271,39 @@
                     android:text="Авто/с"
                     android:textSize="10sp"
                     android:textColor="#666666"
-                    android:layout_marginTop="4dp" />
+                    android:layout_marginTop="2dp" />
 
                 <TextView
-                    android:id="@+id/stat_auto_click"
+                    android:id="@+id/auto_click_display"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
-                    android:textColor="#1a1a1a"
+                    android:textColor="#22c55e"
                     android:layout_marginTop="2dp" />
             </LinearLayout>
 
+            <!-- Total clicks -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:background="#E6FFFFFF"
-                android:padding="12dp"
-                android:layout_marginStart="6dp"
-                android:elevation="2dp">
+                android:background="#BFFFFFFF"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:layout_marginLeft="6dp">
 
                 <TextView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:text="👆"
-                    android:gravity="center"
-                    android:textSize="14sp" />
+                    android:textSize="16sp"
+                    android:gravity="center" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -159,16 +311,16 @@
                     android:text="Кликов"
                     android:textSize="10sp"
                     android:textColor="#666666"
-                    android:layout_marginTop="4dp" />
+                    android:layout_marginTop="2dp" />
 
                 <TextView
-                    android:id="@+id/stat_total_clicks"
+                    android:id="@+id/total_clicks_display"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
-                    android:textColor="#1a1a1a"
+                    android:textColor="#555555"
                     android:layout_marginTop="2dp" />
             </LinearLayout>
         </LinearLayout>

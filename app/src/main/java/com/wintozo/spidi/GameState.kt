@@ -53,8 +53,9 @@ object GameState {
     )
 
     val wallpapers = listOf(
-        "wallpeper_1", "wallpaper_2", "wallpeper_3", "wallpaper_4",
-        "wallpaper_5", "wallpaper_6", "wallpaper_7", "wallpaper_8"
+        R.drawable.wallpeper_1, R.drawable.wallpaper_2, R.drawable.wallpeper_3,
+        R.drawable.wallpaper_4, R.drawable.wallpaper_5, R.drawable.wallpaper_6,
+        R.drawable.wallpaper_7, R.drawable.wallpaper_8
     )
 
     val iconUrls = mapOf(

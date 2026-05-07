@@ -1,73 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/wallpaper_1">
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/tab_wallpaper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#40FFFFFF" />
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <LinearLayout
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ежедневные подарки"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#1a1a1a"
+            android:layout_marginBottom="16dp" />
+
+        <ListView
+            android:id="@+id/gifts_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="8dp" />
+    </LinearLayout>
+</FrameLayout>
+
+        <TextView
+            android:id="@+id/gifts_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="12sp"
+            android:textColor="#1a1a1a"
+            android:layout_marginBottom="12dp" />
+
+        <ListView
+            android:id="@+id/gifts_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="12dp">
+            android:divider="@null"
+            android:dividerHeight="8dp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="4dp">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/gifts"
-                    android:scaleType="centerInside" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Подарки"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="#1a1a1a"
-                    android:layout_marginStart="8dp" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/gifts_message"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textSize="12sp"
-                android:textColor="#1a1a1a"
-                android:layout_marginBottom="12dp" />
-
-            <ListView
-                android:id="@+id/gifts_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:divider="@null"
-                android:dividerHeight="8dp" />
-
-            <ImageView
-                android:id="@+id/medal_100k"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/medal"
-                android:visibility="gone"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="16dp" />
-        </LinearLayout>
-    </ScrollView>
+        <ImageView
+            android:id="@+id/medal_100k"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/medal"
+            android:visibility="gone"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp" />
+    </LinearLayout>
 </FrameLayout>
 

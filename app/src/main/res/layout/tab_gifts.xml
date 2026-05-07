@@ -37,31 +37,3 @@
             android:dividerHeight="8dp" />
     </LinearLayout>
 </FrameLayout>
-
-        <TextView
-            android:id="@+id/gifts_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="12sp"
-            android:textColor="#1a1a1a"
-            android:layout_marginBottom="12dp" />
-
-        <ListView
-            android:id="@+id/gifts_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="@null"
-            android:dividerHeight="8dp" />
-
-        <ImageView
-            android:id="@+id/medal_100k"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/medal"
-            android:visibility="gone"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp" />
-    </LinearLayout>
-</FrameLayout>
-

@@ -12,8 +12,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:gravity="center"
-        android:background="#1E3b82f6"
-        android:backgroundTint="#1E3b82f6">
+        android:background="#1E3b82f6">
 
         <TextView
             android:id="@+id/upgrade_icon"
@@ -71,7 +70,7 @@
             android:id="@+id/upgrade_cost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="250 💰"
+            android:text="250"
             android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="#1a1a1a" />
@@ -87,58 +86,5 @@
             android:layout_marginTop="4dp"
             android:backgroundTint="#3b82f6"
             android:textColor="#ffffff" />
-    </LinearLayout>
-</LinearLayout>
-
-        <TextView
-            android:id="@+id/upgrad_desc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Описание"
-            android:textSize="11sp"
-            android:textColor="#666666"
-            android:layout_marginTop="2dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/buy_button"
-        android:layout_width="70dp"
-        android:layout_height="42dp"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:background="@drawable/button_primary_bg"
-        android:clickable="true"
-        android:focusable="true">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
-
-            <ImageView
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:src="@drawable/coin"
-                android:scaleType="centerInside" />
-
-            <TextView
-                android:id="@+id/upgrad_cost"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textSize="11sp"
-                android:textStyle="bold"
-                android:textColor="#FFFFFF"
-                android:layout_marginLeft="2dp" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Купить"
-            android:textSize="9sp"
-            android:textColor="#FFFFFF"
-            android:alpha="0.8" />
     </LinearLayout>
 </LinearLayout>

@@ -5,20 +5,17 @@
     android:layout_height="match_parent"
     android:background="#1a1a1a">
 
-    <!-- Wallpaper background -->
     <ImageView
         android:id="@+id/wallpaper_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop" />
 
-    <!-- White overlay 25% with blur effect simulation -->
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#40FFFFFF" />
 
-    <!-- Toast -->
     <TextView
         android:id="@+id/toast_view"
         android:layout_width="match_parent"
@@ -33,13 +30,11 @@
         android:background="#3b82f6"
         android:visibility="gone" />
 
-    <!-- Main layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- Header (glass) -->
         <LinearLayout
             android:id="@+id/header"
             android:layout_width="match_parent"
@@ -51,8 +46,7 @@
             android:paddingTop="12dp"
             android:paddingBottom="12dp"
             android:background="#BFFFFFFF"
-            android:elevation="4dp"
-            android:borderBottom="1px solid rgba(255,255,255,0.6)">
+            android:elevation="4dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -82,9 +76,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_weight="1"
-                android:gravity="end">
+                android:gravity="end"
+                android:layout_weight="1">
 
                 <ImageView
                     android:id="@+id/medal_icon"
@@ -103,9 +96,7 @@
                     android:paddingRight="12dp"
                     android:paddingTop="6dp"
                     android:paddingBottom="6dp"
-                    android:background="#1E3b82f6"
-                    android:backgroundTint="#1E3b82f6"
-                    android:border="1px solid rgba(59,130,246,0.2)">
+                    android:background="#1E3b82f6">
 
                     <ImageView
                         android:layout_width="20dp"
@@ -126,14 +117,12 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Content -->
         <FrameLayout
             android:id="@+id/content_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <!-- Bottom Nav (glass) -->
         <LinearLayout
             android:id="@+id/bottom_nav"
             android:layout_width="match_parent"
@@ -141,165 +130,6 @@
             android:orientation="horizontal"
             android:background="#BFFFFFFF"
             android:elevation="8dp"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:borderTop="1px solid rgba(255,255,255,0.6)"
-            android:shadow="0 -4px 20px rgba(0,0,0,0.08)">
-
-            <LinearLayout
-                android:id="@+id/tab_game"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?attr/selectableItemBackground">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/game"
-                    android:scaleType="centerInside" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Игра"
-                    android:textSize="10sp"
-                    android:textStyle="bold"
-                    android:textColor="#3b82f6"
-                    android:layout_marginTop="2dp" />
-
-                <View
-                    android:id="@+id/tab_game_indicator"
-                    android:layout_width="24dp"
-                    android:layout_height="3dp"
-                    android:background="#3b82f6"
-                    android:layout_marginTop="2dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/tab_upgrades"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:clickable="true"
-                android:focusable="true">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/upgrades"
-                    android:scaleType="centerInside" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Улучш."
-                    android:textSize="10sp"
-                    android:textStyle="bold"
-                    android:textColor="#9ca3af"
-                    android:layout_marginTop="2dp" />
-
-                <View
-                    android:id="@+id/tab_upgrades_indicator"
-                    android:layout_width="24dp"
-                    android:layout_height="3dp"
-                    android:background="#3b82f6"
-                    android:visibility="gone"
-                    android:layout_marginTop="2dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/tab_gifts"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:clickable="true"
-                android:focusable="true">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/gifts"
-                    android:scaleType="centerInside" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Подарки"
-                    android:textSize="10sp"
-                    android:textStyle="bold"
-                    android:textColor="#9ca3af"
-                    android:layout_marginTop="2dp" />
-
-                <View
-                    android:id="@+id/tab_gifts_indicator"
-                    android:layout_width="24dp"
-                    android:layout_height="3dp"
-                    android:background="#3b82f6"
-                    android:visibility="gone"
-                    android:layout_marginTop="2dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/tab_settings"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:clickable="true"
-                android:focusable="true">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/settings"
-                    android:scaleType="centerInside" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Настр."
-                    android:textSize="10sp"
-                    android:textStyle="bold"
-                    android:textColor="#9ca3af"
-                    android:layout_marginTop="2dp" />
-
-                <View
-                    android:id="@+id/tab_settings_indicator"
-                    android:layout_width="24dp"
-                    android:layout_height="3dp"
-                    android:background="#3b82f6"
-                    android:visibility="gone"
-                    android:layout_marginTop="2dp" />
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
-</FrameLayout>
-        </LinearLayout>
-
-        <!-- Content -->
-        <FrameLayout
-            android:id="@+id/content_container"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <!-- Bottom Nav (glass) -->
-        <LinearLayout
-            android:id="@+id/bottom_nav"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:orientation="horizontal"
-            android:background="#BFFFFFFF"
             android:paddingTop="4dp"
             android:paddingBottom="4dp">
 
@@ -325,7 +155,7 @@
                     android:text="Игра"
                     android:textSize="10sp"
                     android:textStyle="bold"
-                    android:textColor="#1a1a1a"
+                    android:textColor="#3b82f6"
                     android:layout_marginTop="2dp" />
 
                 <View

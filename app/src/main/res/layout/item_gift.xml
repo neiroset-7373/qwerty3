@@ -12,8 +12,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:gravity="center"
-        android:background="#1E3b82f6"
-        android:backgroundTint="#1E3b82f6">
+        android:background="#1E3b82f6">
 
         <TextView
             android:id="@+id/gift_day"
@@ -62,59 +61,4 @@
         android:paddingRight="16dp"
         android:backgroundTint="#3b82f6"
         android:textColor="#ffffff" />
-</LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginTop="4dp">
-
-            <ImageView
-                android:id="@+id/gift_icon"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/coin"
-                android:scaleType="centerInside" />
-
-            <TextView
-                android:id="@+id/gift_reward"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="100 монет"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:textColor="#4b5563"
-                android:layout_marginLeft="6dp" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/claim_button"
-        android:layout_width="70dp"
-        android:layout_height="40dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:background="@drawable/button_primary_bg"
-        android:clickable="true"
-        android:focusable="true">
-
-        <ImageView
-            android:id="@+id/claim_icon"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:src="@drawable/gifts"
-            android:scaleType="centerInside" />
-
-        <TextView
-            android:id="@+id/claim_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Взять"
-            android:textSize="11sp"
-            android:textStyle="bold"
-            android:textColor="#FFFFFF"
-            android:layout_marginLeft="2dp" />
-    </LinearLayout>
 </LinearLayout>

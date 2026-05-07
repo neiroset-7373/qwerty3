@@ -194,28 +194,30 @@
                         android:textStyle="bold"
                         android:textColor="#1a1a1a"
                         android:background="@drawable/button_secondary_bg"
-                        android:paddingLeft="20dp"`n                android:paddingRight="20dp"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
                         android:enabled="false" />
 
                     <TextView
-                        android:id="@+id/step_counter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Шаг 1 из 5"
+                        android:text="или"
                         android:textSize="12sp"
                         android:textColor="#1a1a1a"
-                        android:layout_marginLeft="16dp"`n                android:layout_marginRight="16dp" />
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp" />
 
                     <Button
                         android:id="@+id/btn_next"
                         android:layout_width="wrap_content"
-                        android:layout_height="45dp"
-                        android:text="Далее"
+                        android:layout_height="40dp"
+                        android:text="Далее →"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         android:textColor="#FFFFFF"
                         android:background="@drawable/button_primary_bg"
-                        android:paddingLeft="24dp"`n                android:paddingRight="24dp" />
+                        android:paddingLeft="24dp"
+                        android:paddingRight="24dp" />
                 </LinearLayout>
 
                 <!-- Final Start Button (step 5) -->

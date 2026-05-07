@@ -47,8 +47,10 @@
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:background="#E6FFFFFF"
-            android:paddingLeft="12dp"`n                android:paddingRight="12dp"
-            android:paddingTop="6dp"`n                android:paddingBottom="6dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
             android:layout_marginStart="8dp">
 
             <ImageView
@@ -86,7 +88,8 @@
         android:orientation="horizontal"
         android:background="@android:color/transparent"
         android:elevation="4dp"
-        android:paddingTop="8dp"`n                android:paddingBottom="8dp">
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
 
         <!-- Game Tab -->
         <LinearLayout

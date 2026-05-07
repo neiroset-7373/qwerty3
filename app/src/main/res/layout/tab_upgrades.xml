@@ -49,8 +49,10 @@
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
                     android:background="#E6FFFFFF"
-                    android:paddingLeft="10dp"`n                android:paddingRight="10dp"
-                    android:paddingTop="4dp"`n                android:paddingBottom="4dp">
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp">
 
                     <ImageView
                         android:layout_width="16dp"

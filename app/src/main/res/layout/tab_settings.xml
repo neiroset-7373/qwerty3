@@ -84,7 +84,8 @@
                         android:textStyle="bold"
                         android:textColor="#1a1a1a"
                         android:background="@drawable/button_secondary_bg"
-                        android:paddingLeft="12dp"`n                android:paddingRight="12dp" />
+                            android:paddingLeft="12dp"
+                            android:paddingRight="12dp" />
                 </LinearLayout>
 
                 <GridView
@@ -145,7 +146,8 @@
                             android:textStyle="bold"
                             android:textColor="#1a1a1a"
                             android:background="@drawable/button_secondary_bg"
-                            android:paddingLeft="12dp"`n                android:paddingRight="12dp"
+                            android:paddingLeft="12dp"
+                            android:paddingRight="12dp"
                             android:layout_marginEnd="8dp" />
 
                         <Switch
@@ -182,7 +184,8 @@
                         android:layout_weight="1"
                         android:max="100"
                         android:progress="30"
-                        android:layout_marginLeft="8dp"`n                android:layout_marginRight="8dp" />
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp" />
 
                     <TextView
                         android:id="@+id/volume_text"

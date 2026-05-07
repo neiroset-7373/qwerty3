@@ -37,14 +37,3 @@
             android:dividerHeight="8dp" />
     </LinearLayout>
 </FrameLayout>
-        </LinearLayout>
-
-        <ListView
-            android:id="@+id/upgrades_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="@null"
-            android:dividerHeight="8dp" />
-    </LinearLayout>
-</FrameLayout>
-

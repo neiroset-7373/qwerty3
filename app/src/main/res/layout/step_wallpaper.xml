@@ -41,5 +41,5 @@
         android:textColor="#3b82f6"
         android:background="@drawable/button_secondary_bg"
         android:layout_marginTop="12dp"
-        android:paddingHorizontal="16dp" />
+        android:paddingLeft="16dp"`n                android:paddingRight="16dp" />
 </LinearLayout>

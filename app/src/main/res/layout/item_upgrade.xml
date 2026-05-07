@@ -45,8 +45,8 @@
                 android:textStyle="bold"
                 android:textColor="#22c55e"
                 android:background="#dcfce7"
-                android:paddingHorizontal="6dp"
-                android:paddingVertical="2dp"
+                android:paddingLeft="6dp"`n                android:paddingRight="6dp"
+                android:paddingTop="2dp"`n                android:paddingBottom="2dp"
                 android:layout_marginStart="8dp"
                 android:visibility="gone" />
         </LinearLayout>

@@ -109,6 +109,17 @@
                         android:background="#E0E0E0" />
                 </LinearLayout>
 
+                <!-- Step Counter -->
+                <TextView
+                    android:id="@+id/step_counter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Шаг 1 из 5"
+                    android:textSize="12sp"
+                    android:textColor="#666666"
+                    android:layout_marginTop="4dp" />
+
                 <!-- Step Labels -->
                 <LinearLayout
                     android:layout_width="match_parent"
